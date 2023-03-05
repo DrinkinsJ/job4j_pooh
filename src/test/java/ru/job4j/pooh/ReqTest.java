@@ -20,9 +20,9 @@ public class ReqTest {
                 "temperature=18" + ls;
         Req req = Req.of(content);
         assertThat(req.httpRequestType(), is("POST"));
-        assertThat(req.getPoohMode(), is("queue"));
-        assertThat(req.getSourceName(), is("weather"));
-        assertThat(req.getParam(), is("temperature=18"));
+        assertThat(req.poohMode(), is("queue"));
+        assertThat(req.sourceName(), is("weather"));
+        assertThat(req.param(), is("temperature=18"));
     }
 
     @Test
@@ -34,9 +34,9 @@ public class ReqTest {
                 + "Accept: */*" + ls + ls + ls;
         Req req = Req.of(content);
         assertThat(req.httpRequestType(), is("GET"));
-        assertThat(req.getPoohMode(), is("queue"));
-        assertThat(req.getSourceName(), is("weather"));
-        assertThat(req.getParam(), is(""));
+        assertThat(req.poohMode(), is("queue"));
+        assertThat(req.sourceName(), is("weather"));
+        assertThat(req.param(), is(""));
     }
 
     @Test
@@ -52,9 +52,9 @@ public class ReqTest {
                 "temperature=18" + ls;
         Req req = Req.of(content);
         assertThat(req.httpRequestType(), is("POST"));
-        assertThat(req.getPoohMode(), is("topic"));
-        assertThat(req.getSourceName(), is("weather"));
-        assertThat(req.getParam(), is("temperature=18"));
+        assertThat(req.poohMode(), is("topic"));
+        assertThat(req.sourceName(), is("weather"));
+        assertThat(req.param(), is("temperature=18"));
     }
 
     @Test
@@ -66,8 +66,8 @@ public class ReqTest {
                 + "Accept: */*" + ls + ls + ls;
         Req req = Req.of(content);
         assertThat(req.httpRequestType(), is("GET"));
-        assertThat(req.getPoohMode(), is("topic"));
-        assertThat(req.getSourceName(), is("weather"));
-        assertThat(req.getParam(), is("client407"));
+        assertThat(req.poohMode(), is("topic"));
+        assertThat(req.sourceName(), is("weather"));
+        assertThat(req.param(), is("client407"));
     }
 }
