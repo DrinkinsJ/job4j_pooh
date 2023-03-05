@@ -20,9 +20,7 @@ public class TopicService implements Service {
                 );
                 status = "201";
             }
-        }
-
-        else if (GET.equals(req.httpRequestType())) {
+        } else if (GET.equals(req.httpRequestType())) {
             topics.putIfAbsent(req.sourceName(), new ConcurrentHashMap<>());
             ConcurrentHashMap<String, ConcurrentLinkedQueue<String>> topic = topics.get(req.sourceName());
             topic.putIfAbsent(req.param(), new ConcurrentLinkedQueue<>());

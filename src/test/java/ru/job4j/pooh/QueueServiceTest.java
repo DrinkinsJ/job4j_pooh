@@ -2,8 +2,8 @@ package ru.job4j.pooh;
 
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class QueueServiceTest {
 
@@ -45,7 +45,6 @@ public class QueueServiceTest {
         System.out.println(result.status());
         assertThat(result.text(), is("temperature=18"));
     }
-
 
 
 }

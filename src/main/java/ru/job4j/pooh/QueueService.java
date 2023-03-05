@@ -17,15 +17,14 @@ public class QueueService implements Service {
             status = "201";
         } else if ("GET".equals(req.httpRequestType())) {
             text = queue.getOrDefault(req.sourceName(), new ConcurrentLinkedQueue<>()).poll();
-                if (text == null) {
-                    text = "";
-                } else {
-                    status = "200";
-                }
+            if (text == null) {
+                text = "";
+            } else {
+                status = "200";
+            }
         }
         return new Resp(text, status);
     }
-
 
 
 }

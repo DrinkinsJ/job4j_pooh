@@ -1,6 +1,8 @@
 package ru.job4j.pooh;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
@@ -11,6 +13,10 @@ import java.util.concurrent.Executors;
 
 public class PoohServer {
     private final HashMap<String, Service> modes = new HashMap<>();
+
+    public static void main(String[] args) {
+        new PoohServer().start();
+    }
 
     public void start() {
         modes.put("queue", new QueueService());
@@ -42,9 +48,5 @@ public class PoohServer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        new PoohServer().start();
     }
 }
