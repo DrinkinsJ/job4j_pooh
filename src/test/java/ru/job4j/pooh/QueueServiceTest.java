@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static ru.job4j.pooh.Service.*;
 
 public class QueueServiceTest {
 
@@ -12,39 +13,39 @@ public class QueueServiceTest {
         QueueService queueService = new QueueService();
         String paramForPostMethod = "temperature=18";
 
-
         queueService.process(
                 new Req("POST", "queue", "weather", paramForPostMethod)
         );
         Resp result = queueService.process(
                 new Req("GET", "queue", "weather", null)
         );
-
-        System.out.println(result.text());
-        System.out.println(result.status());
         assertThat(result.text(), is("temperature=18"));
+        assertThat(result.status(), is(STATUS_OK));
     }
 
     @Test
-    public void whenPostThenGetQueue1() {
+    public void whenPostCreated201() {
         QueueService queueService = new QueueService();
         String paramForPostMethod = "temperature=18";
 
-
-        Resp result2 = queueService.process(new Req("GET", "queue", "weather", null));
-
-
-        queueService.process(
+        Resp result = queueService.process(
                 new Req("POST", "queue", "weather", paramForPostMethod)
         );
-        Resp result = queueService.process(
-                new Req("GET", "queue", "weather", null)
-        );
 
-        System.out.println(result.text());
-        System.out.println(result.status());
-        assertThat(result.text(), is("temperature=18"));
+        assertThat(result.text(), is(""));
+        assertThat(result.status(), is(STATUS_CREATED));
     }
 
+    @Test
+    public void whenGetQueueNoContent() {
+        QueueService queueService = new QueueService();
+        String paramForPostMethod = "temperature=18";
 
+        Resp result = queueService.process(
+                new Req("GET", "queue", "weather", paramForPostMethod)
+        );
+
+        assertThat(result.text(), is(""));
+        assertThat(result.status(), is(STATUS_NO_CONTENT));
+    }
 }

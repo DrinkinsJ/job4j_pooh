@@ -18,7 +18,7 @@ public class TopicService implements Service {
                 topic.forEach((k, v) ->
                         v.add(req.param())
                 );
-                status = "201";
+                status = STATUS_CREATED;
             }
         } else if (GET.equals(req.httpRequestType())) {
             topics.putIfAbsent(req.sourceName(), new ConcurrentHashMap<>());
@@ -27,9 +27,9 @@ public class TopicService implements Service {
             text = topic.get(req.param()).poll();
             if (text == null) {
                 text = "";
-                status = "204";
+                status = STATUS_NO_CONTENT;
             } else {
-                status = "200";
+                status = STATUS_OK;
             }
         }
         return new Resp(text, status);

@@ -10,17 +10,17 @@ public class QueueService implements Service {
     @Override
     public Resp process(Req req) {
         String text = "";
-        String status = "204";
-        if ("POST".equals(req.httpRequestType())) {
+        String status = STATUS_NO_CONTENT;
+        if (POST.equals(req.httpRequestType())) {
             queue.putIfAbsent(req.sourceName(), new ConcurrentLinkedQueue<>());
             queue.get(req.sourceName()).add(req.param());
-            status = "201";
-        } else if ("GET".equals(req.httpRequestType())) {
+            status = STATUS_CREATED;
+        } else if (GET.equals(req.httpRequestType())) {
             text = queue.getOrDefault(req.sourceName(), new ConcurrentLinkedQueue<>()).poll();
             if (text == null) {
                 text = "";
             } else {
-                status = "200";
+                status = STATUS_OK;
             }
         }
         return new Resp(text, status);

@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static ru.job4j.pooh.Service.*;
+
 public class PoohServer {
     private final HashMap<String, Service> modes = new HashMap<>();
 
@@ -19,8 +21,8 @@ public class PoohServer {
     }
 
     public void start() {
-        modes.put("queue", new QueueService());
-        modes.put("topic", new TopicService());
+        modes.put(QUEUE, new QueueService());
+        modes.put(TOPIC, new TopicService());
         ExecutorService pool = Executors.newFixedThreadPool(
                 Runtime.getRuntime().availableProcessors()
         );
